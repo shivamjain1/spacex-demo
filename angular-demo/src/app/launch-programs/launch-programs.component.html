@@ -1,1 +1,32 @@
-<p>launch-programs works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="heading">SpaceX Launch Programs</h1>
+        </div>
+        <div class="col-md-4">
+            <aside class="filters-section">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="filter-header">
+                            <h3>Filters</h3>
+                        </div>
+                        <div class="filter-sub-header">
+                            <h4>Launch Year</h4>
+                        </div>
+                        <ul class="filter-buttons">
+                            <li *ngFor="let year of launchYears; let i = index"
+                            (click)="filterLaunchPrograms(i, year)">{{year}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div *ngFor="let item of launchData" class="col-md-4">
+                    <app-launch-details [data]="item"></app-launch-details>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
