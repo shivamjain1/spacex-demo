@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LaunchProgramsComponent } from './launch-programs/launch-programs.component';
 import { LaunchDetailsComponent } from './launch-details/launch-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { LaunchDetailsComponent } from './launch-details/launch-details.componen
     LaunchDetailsComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'serverApp' })
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
