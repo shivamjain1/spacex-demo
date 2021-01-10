@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { getAllLists, getLaunchByYear } from './data.config';
-
-// const featureConfig = require('./data.config');
-
+import { getAllLists } from './data.config';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +14,7 @@ export class DataService {
     return this.http.get(getAllLists);
   }
 
-  public getLaunchesByYear(year: string): Observable<any> {
-    return this.http.get(`${getLaunchByYear}${year}`);
+  public getFilteredData(query): Observable<any> {
+    return this.http.get(getAllLists + query);
   }
 }
