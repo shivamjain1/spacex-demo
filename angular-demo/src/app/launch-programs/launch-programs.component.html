@@ -1,32 +1,70 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="heading">SpaceX Launch Programs</h1>
-        </div>
-        <div class="col-md-4">
-            <aside class="filters-section">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="filter-header">
-                            <h3>Filters</h3>
-                        </div>
-                        <div class="filter-sub-header">
-                            <h4>Launch Year</h4>
-                        </div>
-                        <ul class="filter-buttons">
-                            <li *ngFor="let year of launchYears; let i = index"
-                            (click)="filterLaunchPrograms(i, year)">{{year}}</li>
-                        </ul>
-                    </div>
-                </div>
-            </aside>
-        </div>
-        <div class="col-md-8">
-            <div class="row">
-                <div *ngFor="let item of launchData" class="col-md-4">
-                    <app-launch-details [data]="item"></app-launch-details>
-                </div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="heading">SpaceX Launch Programs</h3>
     </div>
+    <div class="col-md-3">
+      <aside class="filters-section">
+        <div class="card">
+          <div class="card-body">
+            <div class="filter-header">
+              <h4>Filters</h4>
+            </div>
+            <div class="filter-sub-header">
+              <h5>Launch Year</h5>
+            </div>
+            <ul class="filter-buttons">
+              <li
+                [ngClass]="currentSelectedYear === i ? 'active' : ''"
+                *ngFor="let year of launchYears; let i = index"
+                (click)="getLaunchByYear(i)"
+              >
+                {{ year }}
+              </li>
+            </ul>
+            <div class="filter-sub-header">
+              <h5>Successful Launch</h5>
+            </div>
+            <ul class="filter-buttons">
+              <li
+                [ngClass]="currentLaunchSuccessIndex === i ? 'active' : ''"
+                *ngFor="let val of success; let i = index"
+                (click)="filterByLaunchSuccess(i)"
+              >
+                {{ val.key }}
+              </li>
+            </ul>
+            <div class="filter-sub-header">
+              <h5>Successful Landing</h5>
+            </div>
+            <ul class="filter-buttons">
+              <li
+                [ngClass]="currentLandSuccessIndex === i ? 'active' : ''"
+                *ngFor="let val of success; let i = index"
+                (click)="filterByLandSuccess(i)"
+              >
+                {{ val.key }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+    <div class="col-md-9">
+      <p *ngIf="isLoading" class="loading-text"><strong>Loading...</strong></p>
+      <div *ngIf="!isLoading" class="row">
+        <div *ngIf="!launchData.length; else showRecords">
+          <strong>No Launch Details Found</strong>
+        </div>
+        <ng-template #showRecords>
+          <div *ngFor="let item of launchData" class="col-md-3">
+            <app-launch-details [data]="item"></app-launch-details>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <h4 class="footer"><strong>Developed by: </strong>Shivam Jain</h4>
+    </div>
+  </div>
 </div>
